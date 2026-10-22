@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: Hotel-Service
+
+
+  config:
+    import: "optional:configserver:http://localhost:9090"
+
+  datasource:
+    username: priyanshu
+    password: root
+    url: jdbc:postgresql://localhost:5432/hotel
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8092
+
+  servlet:
+    context-path: /api/v1
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,metrics
+
+  endpoint:
+    health:
+      show-details: when_authorized
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
